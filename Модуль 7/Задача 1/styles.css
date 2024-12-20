@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+.book-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.book-list li {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+ol {
+    list-style-type: none; 
+    counter-reset:  item;
+   }
+
+li::before {
+    content: counter(item) ') ';
+    counter-increment: item; 
+   }
+
+button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 4px;
+    color: white;
+}
+
+.search-book {
+    background:blue;
+    border-color: blue;
+}
+
+.add-book {
+    background: darkgreen;
+    border-color: darkgreen;
+}

@@ -1,0 +1,24 @@
+<h1>Поиск минимального и максимального числа</h1>
+<p class="all-elements"></p>
+<button class="min">Найти минимальное число</button>
+<button class="max">Найти максимальное число</button>
+<p>Минимальное число: <span class="minNumber"></span></p>
+<p>Максимальное число: <span class="maxNumber"></span></p>
+
+<script>
+    const numbers = [12, 5, 8, 20, 3, 16];
+    const allElParagraph = document.querySelector('.all-elements');
+    allElParagraph.textContent = numbers.join(', ');
+
+    function findMin() {
+        const minNumber = Math.min(...numbers);
+        document.querySelector('.minNumber').textContent = minNumber; 
+    }
+    function findMax() {
+        const maxNumber = Math.max(...numbers); 
+        document.querySelector('.maxNumber').textContent = maxNumber; 
+    }
+    document.querySelector('.min').addEventListener('click', findMin);
+    document.querySelector('.max').addEventListener('click', findMax);
+</script>
+    

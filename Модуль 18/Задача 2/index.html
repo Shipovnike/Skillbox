@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прогресс-бар</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+<div class="progress-container">
+    <div id="progress-bar"></div>
+</div>
+<div id="timer">0</div>
+
+<script>
+    function progress(time) {
+        const progressBar = document.getElementById('progress-bar');
+        const timerDisplay = document.getElementById('timer');
+
+        if (time < 2) {
+            time = 2;
+        }
+
+        const totalTime = time * 1000; 
+        const interval = 100; 
+        const steps = totalTime / interval;
+        const increment = 100 / steps; 
+        let currentWidth = 0; 
+        let elapsedTime = 0;
+
+        const timerInterval = setInterval(() => {
+            elapsedTime += 1000; 
+            timerDisplay.innerText = Math.floor(elapsedTime / 1000);
+
+            if (elapsedTime >= totalTime) {
+                clearInterval(timerInterval);
+                timerDisplay.innerText = time;
+            }
+        }, 1000);
+
+        const progressInterval = setInterval(() => {
+            currentWidth += increment;
+            progressBar.style.width = currentWidth + '%';
+
+            if (currentWidth >= 100) {
+                clearInterval(progressInterval);
+                progressBar.style.width = '100%';
+            }
+        }, interval);
+    }
+
+    progress(5);
+</script>
+</body>
+</html>

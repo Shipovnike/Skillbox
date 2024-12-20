@@ -1,0 +1,28 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+#progress-bar {
+    background-color: #4caf50;
+    height: 20px;
+    width: 0;
+    transition: width 0.1s;
+}
+
+.progress-container {
+    background-color: #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 500px;
+}
+
+#timer {
+    margin-top: 20px;
+    font-size: 24px;
+}

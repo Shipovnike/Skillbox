@@ -1,0 +1,14 @@
+<script>
+function createCar(additionalProperties) {
+
+    const car = {
+      wheels: 4,
+      doors: 4,
+      isStarted: false,
+    };
+
+    return { ...car, ...additionalProperties };
+  }
+ 
+  console.log(createCar({ name: 'Haval', hp: 198 }));
+</script>

@@ -1,0 +1,48 @@
+<script>
+const cars = {
+  toyota: {
+    name: "Toyota Camry",
+    wheels: 4,
+    doors: 4,
+    isStarted: false,
+    hp: 200,
+  },
+  bmw: {
+    name: "BMW 3 Series",
+    wheels: 4,
+    doors: 4,
+    isStarted: true,
+    hp: 250,
+  },
+  ford: {
+    name: "Ford Mustang",
+    wheels: 4,
+    doors: 2,
+    isStarted: false,
+    hp: 450,
+  },
+  tesla: {
+    name: "Tesla Model S",
+    wheels: 4,
+    doors: 4,
+    isStarted: true,
+    hp: 670,
+  },
+};
+
+function getCar(carName) {
+  if (cars[carName]) {
+    return cars[carName];
+  } else {
+    console.log("Автомобиль не найден.");
+    return null;
+  }
+}
+
+const carName = "bmw";
+const result = getCar(carName);
+
+if (result) {
+  console.log(result);
+}
+</script>

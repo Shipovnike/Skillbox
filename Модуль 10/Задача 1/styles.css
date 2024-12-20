@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.gallery {
+    display: flex;
+}
+
+.thumbnails {
+    display: flex;
+    flex-direction: row;
+    margin-right: 20px;
+}
+
+.thumbnail {
+    cursor: pointer;
+    margin-bottom: 10px;
+    border: 2px solid transparent;
+    width: 186px;
+    height: 125px;
+}
+
+.thumbnail:hover {
+    border: 2px solid #007BFF;
+}
+
+.fullsize img {
+    display: block;
+    max-width: 500px;
+    max-height: 500px;
+}

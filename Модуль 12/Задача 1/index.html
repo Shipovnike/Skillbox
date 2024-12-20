@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подарок для вас!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="overlay"></div>
+<div id="popup">
+    <img id="giftIcon" src="" alt="Иконка подарка">
+    <h2 id="giftTitle"></h2>
+    <button id="closeBtn">Отлично!</button>
+</div>
+
+<script>
+    const giftArr = [
+        {
+            title: "Скидка 20% на первую покупку в нашем магазине!",
+            icon: "/img/discount.svg"
+        },
+        {
+            title: "Скидка 10% на всё!",
+            icon: "/img/discount_2.svg"
+        },
+        {
+            title: "Подарок при первой покупке в нашем магазине!",
+            icon: "/img/gift.svg"
+        },
+        {
+            title: "Бесплатная доставка для вас!",
+            icon: "/img/delivery.svg"
+        },
+        {
+            title: "Сегодня день больших скидок!",
+            icon: "/img/discount_3.svg"
+        }
+    ];
+
+    function showPopup() {
+        const randomIndex = Math.floor(Math.random() * giftArr.length);
+        const selectedGift = giftArr[randomIndex];
+
+        document.getElementById('giftIcon').src = selectedGift.icon;
+        document.getElementById('giftTitle').textContent = selectedGift.title;
+
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+    }
+    setTimeout(showPopup, 3000);
+
+    document.getElementById('closeBtn').addEventListener('click', function() {
+        document.getElementById('popup').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+    });
+</script>
+</body>
+</html>

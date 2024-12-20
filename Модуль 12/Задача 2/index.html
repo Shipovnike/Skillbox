@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Промокод</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="promoContainer" class="promo-form">
+    <h2>Введите подарочный промокод</h2>
+    <form id="promoForm">
+        <input type="text" id="promoInput" placeholder="Ваш промокод" required>
+        <button type="submit">Проверить</button>
+    </form>
+    <div id="message"></div>
+</div>
+
+<script>
+    const promocodeObj = {
+        promocode: "PROM50",
+        gift: "Скидка 50%"
+    };
+
+    function getCookie() {
+        return document.cookie.split('; ').reduce((acc, item) => {
+            const [name, value] = item.split('=');
+            acc[name] = decodeURIComponent(value);
+            return acc;
+        }, {});
+    }
+
+    const cookie = getCookie();
+    const promoContainer = document.getElementById('promoContainer');
+    const promoInput = document.getElementById('promoInput');
+    const message = document.getElementById('message');
+
+    if (cookie.promo) {
+        promoInput.value = cookie.promo;
+        message.innerHTML = `<div class="promo-success">Промокод "${cookie.promo}" активирован! Подарок: ${promocodeObj.gift}</div>`;
+        promoContainer.classList.replace('promo-form', 'promo-success');
+    }
+
+    const promoForm = document.getElementById('promoForm');
+
+    promoForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const inputPromoCode = promoInput.value.trim();
+        
+        if (inputPromoCode === promocodeObj.promocode) {
+            message.innerHTML = `<div class="promo-success">Промокод "${inputPromoCode}" активирован! Подарок: ${promocodeObj.gift}</div>`;
+            promoContainer.classList.replace('promo-form', 'promo-success');
+            document.cookie = `promo=${encodeURIComponent(inputPromoCode)}; path=/; max-age=31536000`;
+        } else {
+            message.innerHTML = '';
+            promoInput.value = '';
+            promoContainer.classList.add('promo-form');
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+<script>
+    const countVowels = (word) => {
+        const vowels = ['a', 'e', 'i', 'o', 'u'];
+        const lowerCaseWord = word.toLowerCase();
+        const vowelCount = lowerCaseWord.split('').filter(letter => vowels.includes(letter)).length;
+        return vowelCount;
+    };
+    
+    const word = 'JavaScript';
+    const vowelCount = countVowels(word);
+    console.log(vowelCount); 
+    </script>
+    

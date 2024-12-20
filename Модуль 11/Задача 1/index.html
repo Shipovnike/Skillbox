@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Опросник</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+        .result {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Форма опроса</h1>
+<form id="surveyForm">
+    <label for="name">Имя пользователя:</label><br>
+    <input type="text" id="name" name="name" required><br>
+    <span class="error" id="nameError"></span><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" required><br>
+    <span class="error" id="emailError"></span><br>
+
+    <label>Пол:</label><br>
+    <input type="radio" id="male" name="gender" value="Мужской" required>
+    <label for="male">Мужской</label><br>
+    <input type="radio" id="female" name="gender" value="Женский">
+    <label for="female">Женский</label><br>
+
+    <label for="rating">Оценка сервиса (1-10):</label><br>
+    <input type="range" id="rating" name="rating" min="1" max="10" value="5"><br>
+    <span id="ratingValue">5</span><br>
+
+    <label>Интересы:</label><br>
+    <input type="checkbox" id="sport" name="interests" value="Спорт">
+    <label for="sport">Спорт</label><br>
+    <input type="checkbox" id="music" name="interests" value="Музыка">
+    <label for="music">Музыка</label><br>
+    <input type="checkbox" id="travel" name="interests" value="Путешествия">
+    <label for="travel">Путешествия</label><br>
+    <input type="checkbox" id="cinema" name="interests" value="Кино">
+    <label for="cinema">Кино</label><br>
+
+    <label for="comments">Дополнительные комментарии:</label><br>
+    <textarea id="comments" name="comments"></textarea><br>
+
+    <button type="submit">Отправить</button>
+</form>
+
+<div class="result" id="result"></div>
+
+<script>
+document.getElementById('rating').addEventListener('input', function() {
+    document.getElementById('ratingValue').textContent = this.value;
+});
+
+document.getElementById('surveyForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    document.getElementById('nameError').textContent = '';
+    document.getElementById('emailError').textContent = '';
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const gender = document.querySelector('input[name="gender"]:checked');
+    
+    let valid = true;
+
+    if (!name) {
+        document.getElementById('nameError').textContent = 'Имя обязательно для заполнения.';
+        valid = false;
+    }
+
+    if (!email) {
+        document.getElementById('emailError').textContent = 'Email обязателен для заполнения.';
+        valid = false;
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+        document.getElementById('emailError').textContent = 'Введите корректный email.';
+        valid = false;
+    }
+
+    if (!gender) {
+        alert('Пожалуйста, выберите пол.');
+        valid = false;
+    }
+
+    if (valid) {
+        const rating = document.getElementById('rating').value;
+        const interests = Array.from(document.querySelectorAll('input[name="interests"]:checked')).map(el => el.value);
+        const comments = document.getElementById('comments').value;
+
+        document.getElementById('result').innerHTML = `
+            <h2>Результаты опроса:</h2>
+            <p><strong>Имя:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Пол:</strong> ${gender.value}</p>
+            <p><strong>Оценка сервиса:</strong> ${rating}</p>
+            <p><strong>Интересы:</strong> ${interests.join(', ') || 'Нет'}</p>
+            <p><strong>Комментарии:</strong> ${comments || 'Нет'}</p>`;
+    }
+});
+</script>
+
+</body>
+</html>
